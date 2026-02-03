@@ -10,6 +10,7 @@ Follow along with the demo to learn how to calculate percentage change using R a
 
 ```{r}
 library(tidyverse)
+
 ```
 
 
@@ -28,13 +29,29 @@ umd_fees_pct <- umd_fees |> mutate(pct_change = (`Fall 2024`- `Fall 2021`)/`Fall
 ```
 
 
+```{r}
+umd_fees_pct_2524 <- umd_fees |> mutate(pct_change = (`Fall 2025`- `Fall 2024`)/`Fall 2024` * 100)
+```
+
+
 
 ### Task 4: Describe our results
 
 Write a few sentences about what you found in the data. What's the story here?
 
+Student fees in every category, minus Athletics, have been on the rise every year since 2021, which I think is typically expected. The one category with the most noticeable increase is in the Student Counselor Category, which went from 0 in fees in 2021 to 52 in fees in 2025. I think there could be a story in why these fees were recently introduced and what purpose they serve. I also see that Student Sustainability fees was the only category that did not increase, minus Atheltics, so there could be a story in why these fee increases have stalled and what that might mean.
 
+```{r}
+comp <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/class_composition.csv")
 
-
+comp |>
+  summarize(
+    mean_first = mean(first_year),
+    mean_soph = mean(sophomore),
+    mean_junior = mean(junior),
+    mean_senior = mean(senior),
+    mean_grad = mean(grad)
+  )
+```
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
