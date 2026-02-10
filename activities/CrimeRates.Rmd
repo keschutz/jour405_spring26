@@ -45,7 +45,7 @@ crimes_with_rates <- crimes |> mutate(violent_rate = violent_crime_total/populat
 
 Write a few sentences about what you found in the data. What years had the highest crime rates? What years had the lowest crime rates? Does the pattern match your expectations?
 
-
+Both the property crime rates and violent crime rates hit low points in the most recent data, from 2020. I expect that the pandemic was a cause for these lower rates. The mid 1990's saw high rates in both violent and property crime, with violent crime peaking in 1992 at a rate of 99.9% and property crime peaking in 1995 at a rate of 530.7%, though property crime was highest in 1980 with a reporting rate of 577.5%. This is about what I expected from the data, although I find it interesting that property crime reached a more notable peak in the early 80's than violent crime did, because the two peaked together in the 90's.
 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
