@@ -64,3 +64,18 @@ Ocean City, a popular summer destination, had the highest reported property crim
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+### Task 10: Save Your Work and Put it on GitHub
+
+Using the 2020 violent crime rate, calculate the percentiles using `ntile()`. Save the results to a new dataframe called `md_cities_percentiles`. How many cities are above the 90th percentile?
+Calculate the Interquartile Range of the 2020 violent crime rate using `summarize()` and R's `IQR()` function. The syntax is similar to how `mean()` works.
+Do the results change your best story idea from the previous assignment? Why or why not?
+
+```{r}
+md_cities_percentiles <- md_cities_change |> mutate(percentile = ntile(violent_rate_2020, 100)) 
+
+md_cities_percentiles |> summarize(IQR(violent_rate_2020))
+
+md_cities_percentiles |> summary(violent_rate_2020)
+```
+The IQR and percentile results do not change my best story idea from this assignment. As I noticed before, Ocean City has the highest crime rate of all these Maryland cities. This was confirmed by the percentile calculation, which puts Ocean City in the 100th percentile for violent crime in 2020, meaning it had the same or higher crime rate than every other city on this list. Still factoring in it's low population total, the fact that this city's crime rates vastly outpaced every other city on the list makes it the best material for a story, in my opinion.
