@@ -35,10 +35,6 @@ car_thefts |>
   geom_vline(aes(xintercept = mean(count) - sd(count)), color = "blue", linetype = "dashed", size = 1) +
   geom_vline(aes(xintercept = mean(count) + sd(count)), color = "blue", linetype = "dashed", size = 1)
 ```
-
-
-
-
 ### Task 5: Add a line to the histogram that shows the mean of the number of car thefts, and two other lines to show one standard deviation in both directions
 
 
@@ -46,6 +42,6 @@ car_thefts |>
 
 Is the distribution normal or skewed in one direction? Write a sentence in which you describe the range of the data covered by one standard deviation from the mean on both sides - how much of the data falls in that range?
 
-
+I think it could be argued that this data set is normally distributed. It's definitely not perfectly normally distributed, but the curve has a normal-ish shape to it. At least two thirds of the data are within one standard deviation of the mean, falling within the range 8.4 to 16.96 thefts. 
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
