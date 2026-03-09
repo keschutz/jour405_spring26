@@ -122,18 +122,18 @@ ggplot(simulations_all, aes(x = proportion)) +
 
 **Describe the shape of the n=50 histogram.** Is it as symmetric as the unaffiliated histogram from class? Why do you think that is, given that White Evangelicals make up only about 10% of the population?
 
-ANSWER HERE
+The n=50 histogram is low and wide, similarly to that of the unaffiliated histogram from class. However, it is more spread out than the histogram from class. The fact that White Evangelicals make up a smaller proportion of the population could explain why that group's n=50 distribution is more spread out, because the simulated polls are distributed across a smaller range of values.
 
 **Compare the n=50 and n=500 histograms for this group.** How much does the distribution change with a larger sample? Is the improvement bigger or smaller than what you saw in class with the unaffiliated group?
 
-ANSWER HERE
+The improvement is very similar to that of the n=500 histogram for the unaffiliated group. In both scenarios, the distribution became much taller and thinner, clustering more closely around the true population proportion. For the White Evangelical distribution, there was slightly less improvement; more of the distribution was slightly to the left of the true population proportion, whereas the unaffiliated n=500 distribution was very centered around the true population proportion.
 
 **A news organization wants to report on White Evangelical voters using a poll of 200 people.** Based on your simulations, roughly how many White Evangelical respondents would that poll be likely to include? What does that suggest about the reliability of estimates for smaller subgroups?
 
-ANSWER HERE
+According to the data, White Evangelicals make up about 10% of the population, so there should be roughly 20 White Evangelicals included in a voter poll of 200. As shown in the n=50 sample, there will not always be exactly the correct proportion of White Evangelicals polled, especially in a small sample. The smaller the sample is, the more likely it is that the number of White Evangelicals will not be an accurate representation of the true population proportion.
 
 **Imagine you are covering the 2028 presidential election and a campaign shares a poll showing White Evangelical support at 78%.** The poll sampled 400 people. Based on everything you've seen in this assignment and in class, what would you want to know before reporting that number?
 
-ANSWER HERE
+I would need to know what percentage of the full population identifies as White Evangelical. I would also want to know how many White Evangelicals were polled, because that percentage could be misleading if there were a small number of White Evangelicals included in the poll.
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
