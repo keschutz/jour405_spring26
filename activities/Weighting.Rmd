@@ -93,10 +93,13 @@ ggplot(nonvoters_data, aes(x = weight)) +
 **Questions:**
 
 1. What is the range of weights in this dataset?
+The weights in this dataset range from close to 0 to around 2.75.
 
 2. What does it mean when a respondent has a weight of 0.23? What about 3.04?
+If a respondent has a weight of 0.23, that means they are counted as 23% of a response, likely because that respondent is from an overrepresented population. A respondent with a weight of 3.04 is counted as 304% of a reponse, likely because that respondent is from an underrepresented population.
 
 3. Why might some respondents be weighted more heavily than others?
+Some weights are more heavy in order to give more volume to underrepresented survey respondents. If some respondents are from an underrepresented population, they might be weighted more heavily.
 
 # Exercise 1: Voter Categories and Weighting
 
@@ -232,7 +235,10 @@ kable(comparison, digits = 1, caption = "Difference Between Weighted and Unweigh
 **Answer These Questions:**
 
 1. Which voter category shows the biggest difference between weighted and unweighted results?
+The biggest difference between weighted and unweighted results for voter intentions is in the rarely/never category.
 
 2. How might these differences affect reporting on likely voter turnout?
+If a proportion of people classified as 'rarely/never' are actually more likely to vote, meaning maybe they should have put themselves in a different category, then we might see a higher proportion of people classified as rarely/never voters coming out to vote, which would be unexpected based on how they are classified in the sample.
 
 3. Why do you think these differences exist? What does this tell us about who might be over or under-represented in the sample?
+The difference between the weighted and unweighted numbers for rarely/never voters might exist because some people may classify themselves as rarely/never voters when, in reality, they're more in the 'always' or 'sporadic' categories. By adjusting the always/never numbers by making that group weight less in the sample, we are aiming to capture a more realistic representation, as that group may have been ovverrepresented in the sample.
