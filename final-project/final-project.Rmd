@@ -1,0 +1,18 @@
+---
+title: "final-project"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+institution_data <- read_csv("C:/GitHub/jour405_spring26/final-project/Most-Recent-Cohorts-Institution.csv")
+```
+
+The file contains information about institutions' characteristics, enrollment, student aid, costs and student outcomes, according to the U.S. Department of Education College Scorecard website. This includes the average SAT scores (SAT_AVG column) and graduation rates (C150_4 column) for each institution, which I will compare for my project. 
+
+I'll need to make sure I filter out the N/As in each column in order for my code to work properly. Other than that, I don't think there is anything else missing here. Those two columns should be all that I need for the comparison.
+
+The one issue it looks like I'm running into is that the entire spreadsheet doesn't appear to be loading when I try to use the read_csv function. It looks like the spreadsheet is cut off after only a few columns, rather than loading all the data. Granted, there are quite a few columns, but the file is under 100MB (it's 96.1MB), so I thought it would work. Is the file too big to run? If so, I may just delete the other columns and re-upload a copy of the spreadsheet containing only the two columns I will need, unless there's some way to fix the error.
