@@ -49,5 +49,18 @@ matches |>
 
 ### Task 6: Describe the results of both the correlation calculation and the scatterplot.
 
+There does not appear to be any relationship between the number of fouls and the goal differentials based on the scatterplot. The data points are very spread out and in sort of a blob, and the line across the scatterplot is basically flat, which constitutes no relationship between the variables.
+
+### Task 7: Choose another variable and repeat the stpes in Tasks 4-5, then describe the result.
+
+```{r}
+matches |> summarize(correlation = cor(sh_att, goal_diff, method="pearson"))
+
+matches |> 
+  ggplot() +
+  geom_point(aes(x=goal_diff, y=sh_att)) +
+  geom_smooth(aes(x=goal_diff, y=sh_att), method="lm")
+```
+There is a positive correlation between shot attempts and goal differentials based on the scatterplot. Logically, this makes sense, because you need to have shot attempts in order to score goals. However, just because we can see this correlation doesn't mean that there aren't other variables that also contribute to the goal differentials.
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
