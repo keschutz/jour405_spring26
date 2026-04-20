@@ -3,6 +3,12 @@ title: "final-project"
 output: html_document
 ---
 
+As we've been doing in class recently, I could test for the correlation coefficient between average SAT scores and graduation rates to see if there seems to be a relationship between the two. It may also be interesting to run the same test, but with average ACT scores.
+
+I could also simply create a line charts that display the average scores and graduation rates, to see if it looks like the charts line up.
+
+It might also be interesting to run percentile tests to compare what percentile an institution's average SAT score and graduation rate falls in, to see if the percentiles are similar.
+
 ```{r}
 library(tidyverse)
 ```
