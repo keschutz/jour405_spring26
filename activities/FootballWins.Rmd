@@ -9,7 +9,7 @@ Multiple regression analysis is a statistical method used to understand the rela
 
 ```{r setup}
 library(tidyverse)
-#install.packages('corrplot')
+install.packages('corrplot')
 library(corrplot)
 ```
 
@@ -54,7 +54,7 @@ The coefficients tell us the estimated effect of each independent variable on th
 
 Is this a useful model, based on what you've seen? Why?
 
-ANSWER HERE
+I would say this is a generally useful model because the multiple R-squared value and adjusted R-square value are both relatively high, suggesting the model is a good fit. Also, because the F-statistic's very low p-value suggests that the model as a whole is statistically significant, I would say the model is generally of good quality, especially since the model covers a variety of variables.
 
 ## Correlation Analysis
 
@@ -80,8 +80,10 @@ The results from our correlation analysis show the strength of the relationships
 
 Which of these three factors - Yards Gained, Takeaways and Points Scored - have the most impact on wins? Are there any that do not seem impactful at all?
 
-ANSWER HERE
+From the correlation analysis, it looks like points scored has the most impact on wins, which logically makes sense. It also appears that yards gained has the smallest impact on wins. 
 
 ## Using the Model (3 points)
 
 Without using the words "multiple regression model", describe how you could use this model to cover a team or game.
+
+I could use this model to predict what direction a game might be going in. For example, if a team as scored a lot of points, I could predict that they will win, based on the model. I could also keep the model in mind for comparison purposes when writing a story; for example, if data shows that the number of points a team scores has the most impact on that team's number of wins, but a team scores a comparitively low number of points and still wins, I can highlight that in the story. Or, if a team has a high amount of yards gained and wins, I can mention how data shows those two things do not statistically have a strong relationship.
