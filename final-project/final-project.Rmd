@@ -35,7 +35,7 @@ institutions_slimmer |>
   labs(x = "Average SAT Scores", y = "4-Year Institution Graduation Rate")
 ```
 
-The correlation calculation is 0.7993609, which I would say is strong, and reflected by the scatterplot. Based on the scatterplot, we can see a positive correlation between average SAT scores and graduation rates, suggesting that an institution's average SAT scores may play a role in its graduatio rate. However, there are likely other variables involved.
+The correlation calculation is 0.7993609, which I would say is strong, and reflected by the scatterplot. Based on the scatterplot, we can see a positive correlation between average SAT scores and graduation rates, suggesting that an institution's average SAT scores may play a role in its graduation rate. However, there are likely other variables involved.
 
 
 
