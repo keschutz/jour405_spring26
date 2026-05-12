@@ -2,27 +2,34 @@
 title: "final-project"
 output: html_document
 ---
-
+Running the tidyverse and corrplot libraries to ensure the rest of my code is functional.
 ```{r}
-institutions_slimmer <- institution_data |> select(SAT_AVG, C150_4) |>  filter(!is.na(SAT_AVG)) |>  filter(!is.na(C150_4)) 
+library(tidyverse)
+library(corrplot)
 ```
 
+Reading the spreadsheet from the U.S. Department of Education that contains a variety of information and statistics for thousands of schools, including data for SAT scores, ACT scores and graduation rates that I will use in my tests.
 ```{r}
-institutions_slimmer |>
-  ggplot(aes(x = `SAT_AVG`, y = `C150_4`)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE, color = "red") +
-  labs(x = "Average SAT Scores", y = "4-Year Institution Graduation Rate",
-       title = "Average SAT Scores vs. Graduation Rates at 4-year Institutions")
+institution_data <- read_csv("C:/GitHub/jour405_spring26/final-project/Most-Recent-Cohorts-Institution.csv")
 ```
-The scatterplot appeares to show a moderately strong positive relationship between the average SAT scores and the graduation rates for the institutions in this dataset. The dots are still a bit spread out, but they are relatively clearly clustered around the line of best fit. 
 
+The file contains information about institutions' characteristics, enrollment, student aid, costs and student outcomes, according to the U.S. Department of Education College Scorecard website. This includes the average SAT scores (SAT_AVG column), graduation rates (C150_4 column), median SAT scores (SATVRMID) and median ACT scores(ACTCMMID) for each institution, which I will compare for my project.
+
+
+Condensing the large file with institution data to include only the columns that I will be using in my tests. Also, filtering out the N/As for these columns because they would otherwise interfere with my results. I am first going to compare average SAT scores and graduation rates. Then I will compare median SAT scores, median ACT scores and graduation rates.
 ```{r}
-model <- lm(`C150_4` ~ `SAT_AVG`, data = institutions_slimmer)
-summary(model)
+institutions_slimmer <- institution_data |> select(SAT_AVG, ACTCMMID, SATVRMID, C150_4) |>  filter(!is.na(SAT_AVG)) |>  filter(!is.na(C150_4)) |> filter(!is.na(ACTCMMID)) |> filter(!is.na(SATVRMID))
 ```
-The p-value is less than 0.00000000000000022, which is far less than 0.05, making it statistically significant. The adjusted R-square value is 0.6386, so 63.86% of the variation in graduation rates can be explained by the average SAT scores. The coefficient for average SAT scores is 0.0009439, which is small, and therefore may indicate a weak relationship between the two variables. However, overall, these three numbers seem to indicate institutions with students that have higher average SAT scores also have higher graduation rates.  
 
+Summarizing the condensed spreadsheet to produce descriptive statistics about the data in each column.
+```{r}
+summary(institutions_slimmer)
+```
+```{r}
+summarize(institutions_slimmer, mean_SATavg = mean(SAT_AVG), median_SATavg = median(SAT_AVG), IQR(SAT_AVG), mean_GRAD = mean(C150_4), median_GRAD = median(C150_4), IQR(C150_4), mean_ACTmed = mean(ACTCMMID), median_ACTmed = median(ACTCMMID), IQR(ACTCMMID), mean_SATmed = mean(SATVRMID), median_SATmed = median(SATVRMID), IQR(SATVRMID))
+```
+
+I am now calculating the correlation coefficient and creating a graph to show the correlation between average SAT scores and graduation rates to measure the strength of the relationship between the two variables. 
 ```{r}
 institutions_slimmer |> summarize(correlation = cor(C150_4, SAT_AVG, method="pearson"))
 ```
@@ -37,30 +44,35 @@ institutions_slimmer |>
 
 The correlation calculation is 0.7993609, which I would say is strong, and reflected by the scatterplot. Based on the scatterplot, we can see a positive correlation between average SAT scores and graduation rates, suggesting that an institution's average SAT scores may play a role in its graduation rate. However, there are likely other variables involved.
 
-
-
-
-
-
-
-
-
-As we've been doing in class recently, I could test for the correlation coefficient between average SAT scores and graduation rates to see if there seems to be a relationship between the two. It may also be interesting to run the same test, but with average ACT scores.
-
-I could also simply create a line charts that display the average scores and graduation rates, to see if it looks like the charts line up.
-
-It might also be interesting to run percentile tests to compare what percentile an institution's average SAT score and graduation rate falls in, to see if the percentiles are similar.
+I am using a linear regression model to understand if institutions' graduation rates could be predicted by the average SAT scores of their students.
+```{r}
+institutions_slimmer |>
+  ggplot(aes(x = `SAT_AVG`, y = `C150_4`)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Average SAT Scores", y = "4-Year Institution Graduation Rate",
+       title = "Average SAT Scores vs. Graduation Rates at 4-year Institutions")
+```
+The scatterplot appeares to show a moderately strong positive relationship between the average SAT scores and the graduation rates for the institutions in this dataset. The dots are still a bit spread out, but they are relatively clearly clustered around the line of best fit. This is evidence that the instutions' graduation rates could be predicted by their students' average SAT scores.
 
 ```{r}
-library(tidyverse)
+model <- lm(`C150_4` ~ `SAT_AVG`, data = institutions_slimmer)
+summary(model)
 ```
+The p-value is less than 0.00000000000000022, which is far less than 0.05, making it statistically significant. The adjusted R-square value is 0.6386, so 63.86% of the variation in graduation rates can be explained by the average SAT scores. The coefficient for average SAT scores is 0.0009439, which is small, and therefore may indicate a weak relationship between the two variables. However, overall, these three numbers seem to indicate institutions with students that have higher average SAT scores also have higher graduation rates.  
 
+Now I am conducting a correlation analysis to identify how strong the relationships are between median SAT, median SAT and graduation rate for the given institutions. I have begun using median SAT rather than average SAT because there is no average ACT column in the spreadsheet, and I wanted the SAT and ACT comparisons to be as fair as possible.
 ```{r}
-institution_data <- read_csv("C:/GitHub/jour405_spring26/final-project/Most-Recent-Cohorts-Institution.csv")
+selected_vars <- institutions_slimmer |> select(ACTCMMID, SATVRMID, C150_4)
+cor(selected_vars)
 ```
+Next is a more visual representation of the same test:
+```{r}
+corr_matrix <- cor(selected_vars)
+corrplot(corr_matrix, method = "circle")
+```
+There are high positive correlations between both median SAT scores and graduation rates, and median ACT scores and graduation rates. Median ACT scores and graduation rates have a slightly stronger relationship than median SAT scores and graduation rates. The median ACT scores and median SAT scores are extremely strongly correlated. These high correlation coefficient show that, as test scores increase, so do graduation rates for the given institutions. 
 
-The file contains information about institutions' characteristics, enrollment, student aid, costs and student outcomes, according to the U.S. Department of Education College Scorecard website. This includes the average SAT scores (SAT_AVG column) and graduation rates (C150_4 column) for each institution, which I will compare for my project. 
-
-I'll need to make sure I filter out the N/As in each column in order for my code to work properly. Other than that, I don't think there is anything else missing here. Those two columns should be all that I need for the comparison.
-
-The one issue it looks like I'm running into is that the entire spreadsheet doesn't appear to be loading when I try to use the read_csv function. It looks like the spreadsheet is cut off after only a few columns, rather than loading all the data. Granted, there are quite a few columns, but the file is under 100MB (it's 96.1MB), so I thought it would work. Is the file too big to run? If so, I may just delete the other columns and re-upload a copy of the spreadsheet containing only the two columns I will need, unless there's some way to fix the error.
+# Story pitch
+I would write a story about a few of the outlying schools whose graduation rates are significantly lower than their average SAT scores predict based on my analysis. There is a strong correlation between SAT scores and graduation rates for many of the institutions on this spreadsheet, so it would be interesting to see if there is anything strikingly obvious about why some schools do not adhere to that line of best fit.
+This would likely require further research about each institution. For example, does a large percentage of their student body transfer, therefore lowering the graduation rate? Are students who don't graduate working instead, or are they simply dropping out with no other plan? This kind of research could present problems if this kind of info is not publicly available, especially because info about where students go after college is usually reported voluntarily by the students themselves, which could introduce a bias to the research. I would also try and talk to counselors or admissions officers at the schools I chose to investigate to see if they have any kind of insight as to where this non-alignment could be coming from.
